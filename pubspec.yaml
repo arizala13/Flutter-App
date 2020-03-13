@@ -28,3 +28,5 @@ flutter:
 
 dependency_overrides:
   firebase_core: 0.4.4
+
+  

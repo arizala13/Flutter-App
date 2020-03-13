@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -23,7 +22,7 @@ class _CameraScreenState extends State<CameraScreen> {
     if (image == null) {
       return Center(
         child: RaisedButton(
-          child:Text('Select Photo'),
+          child:Text('Select Photo BRO!'),
           onPressed: () {
             getImage();
           },)
