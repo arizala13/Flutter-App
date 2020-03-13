@@ -48,7 +48,13 @@ class MyApp extends StatelessWidget {
                 ],
                 ),
                 onTap: () {
-                  print("Should increase votes here");
+                  Firestore.instance.runTransaction((transaction) async {
+                    DocumentSnapshot freshSnap =
+                      await transaction.get(document.reference);
+                    await transaction.update(freshSnap.reference, {
+                      'votes': freshSnap['votes'] + 1, 
+                    });
+                  });
                 },
             );
         }
