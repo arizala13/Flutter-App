@@ -5,7 +5,6 @@ import 'package:share/share.dart';
 
 class ShareLocation extends StatefulWidget {
   
-  
   @override
   _ShareLocationState createState() => _ShareLocationState();
 }
