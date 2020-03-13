@@ -33,32 +33,6 @@ class MyApp extends StatelessWidget {
         
         final String title;
 
-        Widget _buildListItem(BuildContext context,  DocumentSnapshot document) {
-          return ListTile(
-            title: Row(children:[
-              Expanded(
-                child: Text(
-                  document['name'],
-                )
-                ),
-                Container(
-                  child:Text(
-                    document['votes'].toString(),
-                  ))
-                ],
-                ),
-                onTap: () {
-                  Firestore.instance.runTransaction((transaction) async {
-                    DocumentSnapshot freshSnap =
-                      await transaction.get(document.reference);
-                    await transaction.update(freshSnap.reference, {
-                      'votes': freshSnap['votes'] + 1, 
-                    });
-                  });
-                },
-            );
-        }
-
         @override
         Widget build(BuildContext context) {
           return Scaffold(
@@ -91,16 +65,42 @@ class MyApp extends StatelessWidget {
               body: StreamBuilder(
                 stream: Firestore.instance.collection('bandnames').snapshots(),
                 builder: (context, snapshot) {
-                  if (!snapshot.hasData) return const Text('....loading');
-                  return ListView.builder(
-                    itemExtent: 80.0,
-                    itemCount: snapshot.data.documents.length,
-                    itemBuilder: (context, index) => _buildListItem(context, snapshot.data.documents[index]),
-            );
+                  if (snapshot.hasData && snapshot.data.documents.length > 0) {
+                    return Column(
+                      children: [
+                        Expanded(
+                          child: ListView.builder(
+                          itemCount: snapshot.data.documents.length,
+                          itemBuilder: (context, index) {
+                              var post = snapshot.data.documents[index];
+                              return ListTile(
+                                leading: Text(post['votes'].toString()),
+                                title: Text('Post Title')
+                                );
+                            }
+                          ),
+                        ),
+                        RaisedButton(
+                          child: Text('Send data'),
+                          onPressed: (){
+                            Firestore.instance.collection('bandnames').add({
+                            'votes' :222,
+                            'submission_date': DateTime.parse('2020-01-31')
+                          }); 
+                          }
+                        )
+                      ]
+                    );
+                }
+                  else {
+                    return Center(child: CircularProgressIndicator());
+                  }
                 }
               )
           );
         }
+
+
 }
 
 
