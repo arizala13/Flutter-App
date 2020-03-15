@@ -9,7 +9,7 @@ void main () {
     const latitude = 1.0;
     const longitude = 2.0;
 
-    final food_waste_post = FoodWastePost.fromMap({
+    final foodWastePost = FoodWastePost.fromMap({
       'date' : date,
       'photoURL' : url,
       'quantity' : quantity,
@@ -17,11 +17,11 @@ void main () {
       'longitude' : longitude
     });
 
-    expect(food_waste_post.date, date);
-    expect(food_waste_post.photoURL, url);
-    expect(food_waste_post.quantity, quantity);
-    expect(food_waste_post.latitude, latitude);
-    expect(food_waste_post.longitude, longitude);
+    expect(foodWastePost.date, date);
+    expect(foodWastePost.photoURL, url);
+    expect(foodWastePost.quantity, quantity);
+    expect(foodWastePost.latitude, latitude);
+    expect(foodWastePost.longitude, longitude);
 
   });
 }

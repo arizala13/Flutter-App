@@ -41,11 +41,14 @@ class _CameraScreenState extends State<CameraScreen> {
           children: [
             Image.file(image),
             SizedBox(height: 40),
-            RaisedButton(
-              child: Text('Post it!'),
-              onPressed: () {
-                
-              },
+            Semantics(
+              label: 'Post a picture',
+              child: RaisedButton(
+                child: Text('Post it!'),
+                onPressed: () {
+                  
+                },
+              ),
             )
           ]
         )
