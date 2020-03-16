@@ -41,29 +41,6 @@ class MyApp extends StatelessWidget {
           return Scaffold(
             appBar: AppBar(
               title: Center(child: Text(title)),
-                //               actions: <Widget>[
-                // IconButton(
-                //   icon: const Icon(Icons.add_alert),
-                //   tooltip: 'Location',
-                //   onPressed: () {
-                //     Navigator.pushNamed(context, '/location');
-                //   },
-                // ),
-                // IconButton(
-                //   icon: const Icon(Icons.camera_alt),
-                //   tooltip: 'Camera',
-                //   onPressed: () {
-                //     Navigator.pushNamed(context, '/camera');
-                //   },
-                // ),
-                // IconButton(
-                //   icon: const Icon(Icons.airline_seat_recline_normal),
-                //   tooltip: 'Remote',
-                //   onPressed: () {
-                //     Navigator.pushNamed(context, '/remote');
-                //     },
-                //   ),
-                // ]
               ),
               body: StreamBuilder(
                 stream: Firestore.instance.collection('bandnames').snapshots(),
@@ -87,11 +64,6 @@ class MyApp extends StatelessWidget {
                           child: Icon(Icons.add),
                           onPressed: (){
                             Navigator.pushNamed(context, '/new');
-                          //   Firestore.instance.collection('bandnames').add({
-                          //   'name' :'testing',
-                          //   'totalFood' :222,
-                          //   'submission_date': dateFormatter.format(DateTime.now())
-                          // }); 
                           }
                         )
                       ]
