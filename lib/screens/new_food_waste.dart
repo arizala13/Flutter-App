@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
-import 'package:share/share.dart';
 import 'package:intl/intl.dart';
 
 
@@ -27,7 +26,7 @@ void retrieveLocation() async {
   setState( () {} );
 }
 
-final dateFormatter = DateFormat('yyyy-MM-dd');
+final dateFormatter = DateFormat('yyyy-MM-dd hh:mm');
 
 
   @override
@@ -44,7 +43,7 @@ final dateFormatter = DateFormat('yyyy-MM-dd');
               ),
             ),
               Padding(
-                padding: EdgeInsets.only(top: 100),
+                padding: EdgeInsets.only(top: 10),
                 child: Container(
                   alignment: Alignment.center,
                   padding: EdgeInsets.only(bottom: 10),
@@ -81,6 +80,7 @@ final dateFormatter = DateFormat('yyyy-MM-dd');
                                 }
                                 return null;
                                 },
+                                keyboardType: TextInputType.number,
           ),
                           ),
                   ),
@@ -95,8 +95,8 @@ final dateFormatter = DateFormat('yyyy-MM-dd');
                     onPressed: () {
                 Navigator.pop(context);
                   Firestore.instance.collection('bandnames').add({
-                  'name' :'new screen',
-                  'totalFood' :667,
+                  'name' :'new screen with min and secs',
+                  'totalFood' :32214,
                   'submission_date': dateFormatter.format(DateTime.now())
                 }); 
                 print('save to firestore');
@@ -109,23 +109,3 @@ final dateFormatter = DateFormat('yyyy-MM-dd');
     );
   }
   }
-  
-
-          //   RaisedButton(
-          //   onPressed: () {
-          //     Share.share('Hey! Meet me at ${locationData.latitude}, ${locationData.longitude}');
-          //   },
-          //   child: IconButton(
-          //         icon: const Icon(Icons.cloud),
-          //         tooltip: 'Location',
-          //         onPressed: () {
-          //     //Navigator.pop(context);
-          //     //   Firestore.instance.collection('bandnames').add({
-          //     //   'name' :'testing',
-          //     //   'totalFood' :222,
-          //     //   'submission_date': dateFormatter.format(DateTime.now())
-          //     // }); 
-          //     print('save to firestore');
-          //         }
-          //   )
-          // ),

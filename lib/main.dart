@@ -4,7 +4,6 @@ import 'screens/camera_screen.dart';
 import 'screens/new_food_waste.dart';
 import 'screens/share_location_screen.dart';
 import 'screens/remote_data_screen.dart';
-import 'package:intl/intl.dart';
 
 void main() {
   runApp(const MyApp());
@@ -34,8 +33,6 @@ class MyApp extends StatelessWidget {
         
         final String title;
 
-        final dateFormatter = DateFormat('yyyy-MM-dd');
-
         @override
         Widget build(BuildContext context) {
           return Scaffold(
@@ -43,7 +40,7 @@ class MyApp extends StatelessWidget {
               title: Center(child: Text(title)),
               ),
               body: StreamBuilder(
-                stream: Firestore.instance.collection('bandnames').snapshots(),
+                stream: Firestore.instance.collection('bandnames').orderBy('submission_date', descending: true).snapshots(),
                 builder: (context, snapshot) {
                   if (snapshot.hasData && snapshot.data.documents.length > 0) {
                     return Column(
