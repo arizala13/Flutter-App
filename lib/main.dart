@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'screens/camera_screen.dart';
+import 'screens/detail_view_screen.dart';
 import 'screens/new_food_waste.dart';
 import 'screens/share_location_screen.dart';
 import 'screens/remote_data_screen.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -21,6 +23,7 @@ class MyApp extends StatelessWidget {
           '/location': (context) => ShareLocation(),
           '/camera': (context) => CameraScreen(),
           '/remote': (context) => RemoteDataScreen(),
+          '/detail': (context) => DetailViewScreen(),
           },
           theme: ThemeData(primaryColor: Colors.red),
           home:  MyHomePage(title: 'Wasteagram'),
@@ -50,10 +53,16 @@ class MyApp extends StatelessWidget {
                           itemCount: snapshot.data.documents.length,
                           itemBuilder: (context, index) {
                               var post = snapshot.data.documents[index];
-                              return ListTile(
-                                trailing: Text(post['totalFood'].toString()),
-                                title: Center(child: Text((post['submission_date'].toString())))
-                                );
+                          return GestureDetector(
+                                                      child: ListTile(
+                                  trailing: Text(post['totalFood'].toString()),
+                                  title: Center(child: 
+                                  Text((post['submission_date'].toString())))
+                                  ),
+                                  onTap: (){
+                            Navigator.pushNamed(context, '/detail');
+                          }
+                          );
                             }
                           ),
                         ),
