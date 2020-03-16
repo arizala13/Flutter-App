@@ -97,9 +97,11 @@ final dateFormatter = DateFormat('yyyy-MM-dd hh:mm');
                   Firestore.instance.collection('bandnames').add({
                   'name' :'new screen with min and secs',
                   'totalFood' :32214,
-                  'submission_date': dateFormatter.format(DateTime.now())
+                  'submission_date': dateFormatter.format(DateTime.now()),
+                  'photoURL': 'https://cdn.vox-cdn.com/thumbor/jRl_yTfNV6SBvi9lsb6I7uQ-Xo4=/0x0:3610x2456/1820x1213/filters:focal(1517x940:2093x1516):format(webp)/cdn.vox-cdn.com/uploads/chorus_image/image/66460994/1204093920.jpg.0.jpg',
+                  'locationData.latitude' : '29.7508',
+                  'locationData.longitude' : '95.3621'
                 }); 
-                print('save to firestore');
                     }
               ), onPressed: () {},
             )
