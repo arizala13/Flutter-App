@@ -37,27 +37,53 @@ final dateFormatter = DateFormat('yyyy-MM-dd');
         title: Text("New Entry"),
       ),
       body: Column(
-        children: <Widget>[
+        children: [
           Align(
             alignment: Alignment.bottomCenter,
             child: new Text( 'Select picture below', style: new TextStyle( fontSize: 20.0)
               ),
             ),
               Padding(
-                padding: EdgeInsets.only(top: 250),
+                padding: EdgeInsets.only(top: 100),
                 child: Container(
                   alignment: Alignment.center,
-                  padding: EdgeInsets.only(bottom: 300),
+                  padding: EdgeInsets.only(bottom: 10),
                         child: RaisedButton(
                         child: IconButton(
-                            iconSize: 100.0,
-                              icon: const Icon(Icons.picture_in_picture),
+                            iconSize: 160.0,
+                              icon: const Icon(Icons.camera_alt),
                               tooltip: 'Location',
                               onPressed: () {
+                          Navigator.pushNamed(context, '/camera');
                           print('post pic bro');
                               }
                         ), onPressed: () {},
                     ),
+                ),
+              ),
+                            Padding(
+                padding: EdgeInsets.only(top: 100),
+                child: Center(
+                  child: Container(
+                    alignment: Alignment.center,
+                    padding: EdgeInsets.only(bottom: 50),
+                          child: Center(
+                            child: TextFormField( 
+                              textAlign: TextAlign.center,
+                              decoration: new InputDecoration(
+                                border: new OutlineInputBorder(
+                                  borderSide: new BorderSide(color: Colors.teal)),
+                                  hintText: 'Number of Items',
+                                  ),
+                              validator: (value) { 
+                              if (value.isEmpty) {
+                                return 'Please enter some text';
+                                }
+                                return null;
+                                },
+          ),
+                          ),
+                  ),
                 ),
               ),
                   Text('Save'),

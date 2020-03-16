@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
           '/camera': (context) => CameraScreen(),
           '/remote': (context) => RemoteDataScreen(),
           },
-          theme: ThemeData(primaryColor: Colors.blue),
+          theme: ThemeData(primaryColor: Colors.red),
           home:  MyHomePage(title: 'Wasteagram'),
             );
           }
