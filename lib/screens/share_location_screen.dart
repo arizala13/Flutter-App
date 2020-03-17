@@ -43,7 +43,6 @@ void retrieveLocation() async {
           Text('Longitude: ${locationData.longitude}', style: Theme.of(context).textTheme.display1,),
           RaisedButton(
             onPressed: () {
-              //Navigator.pop(context);
               Share.share('Hey! Meet me at ${locationData.latitude}, ${locationData.longitude}');
             },
             child: Text('Share!'),

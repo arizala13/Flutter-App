@@ -2,6 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 import 'package:intl/intl.dart';
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:path/path.dart' as Path;
 
 
 class NewFoodWaste extends StatefulWidget {
@@ -9,6 +13,7 @@ class NewFoodWaste extends StatefulWidget {
   @override
   _NewFoodWasteState createState() => _NewFoodWasteState();
 }
+
 
 class _NewFoodWasteState extends State<NewFoodWaste> {
 
@@ -27,6 +32,18 @@ void retrieveLocation() async {
 }
 
 final dateFormatter = DateFormat('yyyy-MM-dd hh:mm');
+
+  File image;
+
+  void getImage() async {
+    image = await ImagePicker.pickImage(source: ImageSource.gallery);
+    StorageReference storageReference = 
+      FirebaseStorage.instance.ref().child(Path.basename(image.path));
+    StorageUploadTask uploadTask = storageReference.putFile(image);
+    await uploadTask.onComplete;
+    final url = await storageReference.getDownloadURL();
+    print(url);
+  }
 
 
   @override
@@ -53,8 +70,7 @@ final dateFormatter = DateFormat('yyyy-MM-dd hh:mm');
                               icon: const Icon(Icons.camera_alt),
                               tooltip: 'Location',
                               onPressed: () {
-                          Navigator.pushNamed(context, '/camera');
-                          print('post pic bro');
+                                getImage();
                               }
                         ), onPressed: () {},
                     ),
@@ -99,8 +115,8 @@ final dateFormatter = DateFormat('yyyy-MM-dd hh:mm');
                   'totalFood' :32214,
                   'submission_date': dateFormatter.format(DateTime.now()),
                   'photoURL': 'https://cdn.vox-cdn.com/thumbor/jRl_yTfNV6SBvi9lsb6I7uQ-Xo4=/0x0:3610x2456/1820x1213/filters:focal(1517x940:2093x1516):format(webp)/cdn.vox-cdn.com/uploads/chorus_image/image/66460994/1204093920.jpg.0.jpg',
-                  'locationData.latitude' : '29.7508',
-                  'locationData.longitude' : '95.3621'
+                  'latitude' : 29.7508,
+                  'longitude' : 95.3621
                 }); 
                     }
               ), onPressed: () {},

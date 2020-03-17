@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'screens/camera_screen.dart';
 import 'screens/detail_view_screen.dart';
 import 'screens/new_food_waste.dart';
 import 'screens/share_location_screen.dart';
@@ -21,7 +20,6 @@ class MyApp extends StatelessWidget {
         routes: {
           '/new': (context) => NewFoodWaste(),
           '/location': (context) => ShareLocation(),
-          '/camera': (context) => CameraScreen(),
           '/remote': (context) => RemoteDataScreen(),
           '/detail': (context) => DetailViewScreen(),
           },
