@@ -18,27 +18,30 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Band Name Survey',
         routes: {
+          '/': (context) => MyHomePage(),
           '/new': (context) => NewFoodWaste(),
           '/location': (context) => ShareLocation(),
           '/remote': (context) => RemoteDataScreen(),
           '/detail': (context) => DetailViewScreen(),
           },
           theme: ThemeData(primaryColor: Colors.red),
-          home:  MyHomePage(title: 'Wasteagram'),
             );
           }
         }
-      
-      class MyHomePage extends StatelessWidget {
-        MyHomePage({Key key, this.title}) : super(key: key);
-        
-        final String title;
+    
+class MyHomePage extends StatefulWidget {
+  
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
 
+class _MyHomePageState extends State<MyHomePage> {
+  
         @override
         Widget build(BuildContext context) {
           return Scaffold(
             appBar: AppBar(
-              title: Center(child: Text(title)),
+              title: Center(child: Text('Wastegram')),
               ),
               body: StreamBuilder(
                 stream: Firestore.instance.collection('bandnames').orderBy('submission_date', descending: true).snapshots(),
@@ -81,7 +84,4 @@ class MyApp extends StatelessWidget {
           );
         }
 
-}
-
-
-
+  }
