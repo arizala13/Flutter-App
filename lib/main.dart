@@ -55,11 +55,13 @@ class _MyHomePageState extends State<MyHomePage> {
                           itemBuilder: (context, index) {
                               var post = snapshot.data.documents[index];
                           return GestureDetector(
-                                                      child: ListTile(
+                                                      child: Semantics(
+                                  label: 'get more detail of post',                                                                                                              child: ListTile(
                                   trailing: Text(post['totalFood'].toString()),
                                   title: Center(child: 
                                   Text((post['submission_date'].toString())))
                                   ),
+                                                      ),
                                   onTap: (){
                             Navigator.pushNamed(context, '/detail');
                           }
@@ -67,17 +69,51 @@ class _MyHomePageState extends State<MyHomePage> {
                             }
                           ),
                         ),
-                        FloatingActionButton(
-                          child: Icon(Icons.add),
-                          onPressed: (){
-                            Navigator.pushNamed(context, '/new');
-                          }
+                        Semantics(
+                            label: 'Add new post',
+                            button: true,
+                            child: FloatingActionButton(
+                            child: Icon(Icons.add),
+                            onPressed: (){
+                              Navigator.pushNamed(context, '/new');
+                            }
+                          ),
                         )
                       ]
                     );
                 }
                   else {
-                    return Center(child: CircularProgressIndicator());
+                    return Column(
+                      children: <Widget>[
+                        Padding(
+                                                          padding: const EdgeInsets.only(
+                                      left: 40,
+                                      top: 350,
+                                      right: 40,
+                                      bottom: 10,
+                                    ),
+                          child: Center(child: CircularProgressIndicator()),
+                        ),
+                        Semantics(
+                            label: 'Add new post',
+                            button: true,
+                            child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 40,
+                                      top: 300,
+                                      right: 40,
+                                      bottom: 20,
+                                    ),
+                              child: FloatingActionButton(
+                              child: Icon(Icons.add),
+                              onPressed: (){
+                                Navigator.pushNamed(context, '/new');
+                              }
+                          ),
+                            ),
+                        )
+                      ],
+                    );
                   }
                 }
               )

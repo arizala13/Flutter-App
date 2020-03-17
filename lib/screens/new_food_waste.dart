@@ -1,11 +1,10 @@
+import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 import 'package:intl/intl.dart';
-import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:path/path.dart' as Path;
 
 
@@ -82,13 +81,15 @@ final dateFormatter = DateFormat('yyyy-MM-dd hh:mm');
                   alignment: Alignment.center,
                   padding: EdgeInsets.only(bottom: 10),
                         child: RaisedButton(
-                        child: IconButton(
-                            iconSize: 160.0,
-                              icon: const Icon(Icons.camera_alt),
-                              tooltip: 'Location',
-                              onPressed: () {
-                                getImage();
-                              }
+                        child: Semantics(
+                              label: 'Add picture',
+                              child: IconButton(
+                              iconSize: 160.0,
+                                icon: const Icon(Icons.camera_alt),
+                                onPressed: () {
+                                  getImage();
+                                }
+                          ),
                         ), onPressed: () {},
                     ),
                 ),
@@ -122,19 +123,15 @@ final dateFormatter = DateFormat('yyyy-MM-dd hh:mm');
                   Text('Save'),
                     Container(
             child: RaisedButton(
-              child: IconButton(
-                    icon: const Icon(Icons.cloud),
-                    tooltip: 'Save',
-                    onPressed: () {
-                Navigator.pop(context);
-                  Firestore.instance.collection('bandnames').add({
-                  //'totalFood' :32214,
-                  // 'submission_date': dateFormatter.format(DateTime.now()),
-                   // 'photoURL': saveToDatabase();
-                  // 'latitude' : 29.7508,
-                  // 'longitude' : 95.3621
-                }); 
-                    }
+              child: Semantics(
+                label: 'Save',
+                child: IconButton(
+                      icon: const Icon(Icons.cloud),
+                      tooltip: 'Save',
+                      onPressed: () {
+                  Navigator.pop(context); 
+                      }
+                ),
               ), onPressed: () {},
             )
           ),
