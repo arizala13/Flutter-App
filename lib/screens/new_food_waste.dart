@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:path/path.dart' as Path;
 
 
@@ -31,6 +32,7 @@ void retrieveLocation() async {
   setState( () {} );
 }
 
+
 final dateFormatter = DateFormat('yyyy-MM-dd hh:mm');
 
   File image;
@@ -43,6 +45,21 @@ final dateFormatter = DateFormat('yyyy-MM-dd hh:mm');
     await uploadTask.onComplete;
     final url = await storageReference.getDownloadURL();
     print(url);
+    print('in get image');
+    saveToDatabase(url);
+  }
+
+    void saveToDatabase(url) {
+    
+    Firestore.instance.collection('bandnames').add({
+                  'totalFood' :6969,
+                  'submission_date': dateFormatter.format(DateTime.now()),
+                  'photoURL': url,
+                  'latitude' : 29.7508,
+                 'longitude' : 95.3621
+                }); 
+
+      print('in saveToDatabase');
   }
 
 
@@ -111,12 +128,11 @@ final dateFormatter = DateFormat('yyyy-MM-dd hh:mm');
                     onPressed: () {
                 Navigator.pop(context);
                   Firestore.instance.collection('bandnames').add({
-                  'name' :'new screen with min and secs',
-                  'totalFood' :32214,
-                  'submission_date': dateFormatter.format(DateTime.now()),
-                  'photoURL': 'https://cdn.vox-cdn.com/thumbor/jRl_yTfNV6SBvi9lsb6I7uQ-Xo4=/0x0:3610x2456/1820x1213/filters:focal(1517x940:2093x1516):format(webp)/cdn.vox-cdn.com/uploads/chorus_image/image/66460994/1204093920.jpg.0.jpg',
-                  'latitude' : 29.7508,
-                  'longitude' : 95.3621
+                  //'totalFood' :32214,
+                  // 'submission_date': dateFormatter.format(DateTime.now()),
+                   // 'photoURL': saveToDatabase();
+                  // 'latitude' : 29.7508,
+                  // 'longitude' : 95.3621
                 }); 
                     }
               ), onPressed: () {},
