@@ -51,11 +51,11 @@ final dateFormatter = DateFormat('yyyy-MM-dd hh:mm');
     void saveToDatabase(url) {
     
     Firestore.instance.collection('bandnames').add({
-                  'totalFood' :6969,
+                  //'totalFood' :6969,
                   'submission_date': dateFormatter.format(DateTime.now()),
                   'photoURL': url,
-                  'latitude' : 29.7508,
-                 'longitude' : 95.3621
+                //   'latitude' : 29.7508,
+                //  'longitude' : 95.3621
                 }); 
 
       print('in saveToDatabase');
@@ -67,6 +67,7 @@ final dateFormatter = DateFormat('yyyy-MM-dd hh:mm');
     return Scaffold(
       appBar: AppBar(
         title: Text("New Entry"),
+        backgroundColor: Colors.teal,
       ),
       body: Column(
         children: [
@@ -106,7 +107,7 @@ final dateFormatter = DateFormat('yyyy-MM-dd hh:mm');
                               decoration: new InputDecoration(
                                 border: new OutlineInputBorder(
                                   borderSide: new BorderSide(color: Colors.teal)),
-                                  hintText: 'Number of Items',
+                                  hintText: 'Whats on your mind?',
                                   ),
                               validator: (value) { 
                               if (value.isEmpty) {
@@ -114,7 +115,6 @@ final dateFormatter = DateFormat('yyyy-MM-dd hh:mm');
                                 }
                                 return null;
                                 },
-                                keyboardType: TextInputType.number,
           ),
                           ),
                   ),

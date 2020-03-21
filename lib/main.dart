@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Band Name Survey',
+      title: 'Joornal',
         routes: {
           '/': (context) => MyHomePage(),
           '/new': (context) => NewFoodWaste(),
@@ -24,7 +24,10 @@ class MyApp extends StatelessWidget {
           '/remote': (context) => RemoteDataScreen(),
           '/detail': (context) => DetailViewScreen(),
           },
-          theme: ThemeData(primaryColor: Colors.red),
+          theme: ThemeData(
+            brightness: Brightness.dark,
+            primarySwatch: Colors.orange,
+          ),
             );
           }
         }
@@ -41,7 +44,8 @@ class _MyHomePageState extends State<MyHomePage> {
         Widget build(BuildContext context) {
           return Scaffold(
             appBar: AppBar(
-              title: Center(child: Text('Wastegram')),
+              backgroundColor: Colors.teal,
+              title: Center(child: Text('Journal')),
               ),
               body: StreamBuilder(
                 stream: Firestore.instance.collection('bandnames').orderBy('submission_date', descending: true).snapshots(),
@@ -57,7 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           return GestureDetector(
                                                       child: Semantics(
                                   label: 'get more detail of post',                                                                                                              child: ListTile(
-                                  trailing: Text(post['totalFood'].toString()),
+                                  // trailing: Text(post['totalFood'].toString()),
                                   title: Center(child: 
                                   Text((post['submission_date'].toString())))
                                   ),
@@ -74,6 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             button: true,
                             child: FloatingActionButton(
                             child: Icon(Icons.add),
+                            backgroundColor: Colors.teal,
                             onPressed: (){
                               Navigator.pushNamed(context, '/new');
                             }

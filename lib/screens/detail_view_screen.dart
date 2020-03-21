@@ -14,7 +14,8 @@ class _DetailViewScreenState extends State<DetailViewScreen> {
     Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Detailed view"),
+        title: Text("Journal"),
+        backgroundColor: Colors.teal,
       ),
       body: StreamBuilder(
                 stream: Firestore.instance.collection('bandnames').snapshots(),
